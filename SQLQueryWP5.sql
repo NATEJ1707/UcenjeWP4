@@ -6,28 +6,28 @@ create database klimauredjaj;
 go 
 use klimauredjaj;
 
-create table Proizvod(
+create table proizvodi(
 sifra int not null primary key identity(1,1),
 nazv varchar(100),
 cijena decimal (18,2),
 verificiran bit
 );
 
-create table stavka(
-racun varchar(20) not null,
-proizvod varchar(50),
+create table stavke(
+racun int not null,
+proizvod int not null,
 kolicina int not null,
 cijena decimal(18,2)
 );
 
-create table racun(
+create table racuni(
 sifra int not null primary key identity(1,1),
 datum datetime,
 kupac varchar(50),
 brojracuna varchar(20) 
 );
 
-create table kupac(
+create table kupci(
 sifra int not null primary key identity(1,1),
 ime varchar(20) not null,
 prezime varchar(20) not null,
@@ -35,7 +35,9 @@ ulica varchar(50),
 mjesto varchar(50)
 );
 
-alter table 
+alter table stavke add foreign key (racun) references racuni(sifra);
+alter table stavke add foreign key (proizvod) references proizvodi(sifra);
+alter table racuni add foreign key (kupac) references kupci(sifra);
 
 
 
